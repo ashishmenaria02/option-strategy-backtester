@@ -1,0 +1,18 @@
+import pandas as pd
+
+# Load sample CSV (should contain columns like 'Time', 'ATM_CE', 'OTM_CE')
+data = pd.read_csv('sample_data.csv')
+
+entry_time = '09:20'
+exit_time = '15:15'
+
+entry_data = data[data['Time'] == entry_time]
+exit_data = data[data['Time'] == exit_time]
+
+entry_buy = entry_data['ATM_CE'].values[0]
+entry_sell = entry_data['OTM_CE'].values[0]
+exit_buy = exit_data['ATM_CE'].values[0]
+exit_sell = exit_data['OTM_CE'].values[0]
+
+pnl = (exit_sell - entry_sell) - (exit_buy - entry_buy)
+print(f"Profit/Loss: ₹{pnl}")
